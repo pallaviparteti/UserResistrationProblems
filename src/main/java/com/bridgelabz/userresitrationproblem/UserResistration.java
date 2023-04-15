@@ -10,21 +10,23 @@ public class UserResistration {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter The First Name : ");
-		String data = sc.nextLine();
-
+		String firstName = sc.nextLine();
+		System.out.println("Enter The Last Name : ");
+		String lastName = sc.nextLine();
 
 		Pattern pattern = Pattern.compile(regex);
 
-		Matcher matcher = pattern.matcher(data);
+		Matcher matcher = pattern.matcher(firstName + lastName);
 		boolean result = matcher.matches();
 
 		if (result) {
-			System.out.println("Valid first name");
+			System.out.println("Valid first name and last name");
 		} else {
 			System.out.println("Pattern not matched");
 		}
 
 	}
 }
+
 
 

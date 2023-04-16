@@ -7,43 +7,61 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class UserRegistrationProblem {
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-
-		String firstName = getUserInput(scanner, "Enter first name: ", s -> s.matches("[A-Za-z]+"),
-				"Invalid first name!");
-
-		String lastName = getUserInput(scanner, "Enter last name: ", s -> s.matches("[A-Za-z]+"), "Invalid last name!");
-
-		String email = getUserInput(scanner, "Enter email: ",
-				s -> s.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}"), "Invalid email!");
-
-		String mobile = getUserInput(scanner, "Enter mobile number: ", s -> s.matches("\\d{10}"),
-				"Invalid mobile number!");
-
-		String password = getUserInput(scanner, "Enter password: ",
-				s -> s.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).{8,}$"), "Invalid password!");
-
-		System.out.println("First name: " + firstName);
-		System.out.println("Last name: " + lastName);
-		System.out.println("Email: " + email);
-		System.out.println("Mobile number: " + mobile);
-		System.out.println("Password: " + password);
+	public static boolean isvalidfirstName(String firstName) {
+		String regex = "^[A-Z][A-Za-z]{3,}";
+		Pattern pattern = Pattern.compile(regex);
+		if (firstName == null) {
+			return false;
+		}
+		Matcher matcher = pattern.matcher(firstName);
+		return matcher.matches();
 	}
 
-	private static String getUserInput(Scanner scanner, String prompt, Predicate<String> validator, String errorMsg) {
-		String input;
-		boolean valid;
-		do {
-			System.out.print(prompt);
-			input = scanner.nextLine();
-			valid = validator.test(input);
-			if (!valid) {
-				System.out.println(errorMsg);
-			}
-		} while (!valid);
-		return input;
+	public static boolean isvalidlastName(String lastName) {
+		String regex = "^[A-Z][A-Za-z]{3,}";
+		Pattern pattern = Pattern.compile(regex);
+		if (lastName == null) {
+			return false;
+		}
+		Matcher matcher = pattern.matcher(lastName);
+		return matcher.matches();
+	}
+
+	public static boolean isvalidEmail(String Email) {
+		String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+		Pattern pattern = Pattern.compile(regex);
+		if (Email == null) {
+			return false;
+		}
+		Matcher matcher = pattern.matcher(Email);
+		return matcher.matches();
+
+	}
+
+	public static boolean isvalidMobileNumber(String mobileNumber) {
+		String regex = "^[1-9][0-9]\\s[1-9][0-9]{9}";
+		Pattern pattern = Pattern.compile(regex);
+		if (mobileNumber == null) {
+			return false;
+		}
+		Matcher matcher = pattern.matcher(mobileNumber);
+		return matcher.matches();
+
+	}
+
+	public static boolean isvalidPassword(String password) {
+		String regex = "^.{8,}$";
+		Pattern pattern = Pattern.compile(regex);
+		if (password == null) {
+			return false;
+		}
+		Matcher matcher = pattern.matcher(password);
+		return matcher.matches();
 	}
 }
